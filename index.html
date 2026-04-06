@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>ONE WEEK NON STOP STREAM BRAINROOT</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{width:100%;height:100%;overflow:hidden;background:#040412;color:#fff;font-family:'Courier New',monospace;}
+#app{display:flex;flex-direction:column;width:100vw;height:100vh;}
+
+/* HEADER */
+#hdr{height:52px;flex-shrink:0;background:linear-gradient(90deg,#08082C,#0E0E3A 50%,#08082C);border-bottom:2px solid #FFD700;display:flex;align-items:center;padding:0 12px;gap:10px;}
+.live-dot{background:#FF0000;color:#fff;font-size:10px;font-weight:bold;padding:2px 7px;border-radius:4px;letter-spacing:1.5px;flex-shrink:0;animation:lp 1.6s ease-in-out infinite;}
+@keyframes lp{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,0,0,.5);}50%{opacity:.75;box-shadow:0 0 0 5px rgba(255,0,0,0);}}
+.h-title{font-size:12px;font-weight:bold;color:#FFD700;letter-spacing:2px;text-shadow:0 0 12px rgba(255,215,0,.35);flex:1;white-space:nowrap;}
+.h-stats{display:flex;gap:14px;align-items:center;}
+.hst{display:flex;flex-direction:column;align-items:center;}
+.hsl{font-size:8px;color:#444;letter-spacing:1px;}
+.hsv{font-size:14px;font-weight:bold;color:#FFD700;line-height:1.1;}
+.h-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+#vct{font-size:11px;color:#FF4444;font-weight:bold;white-space:nowrap;}
+.h-nxt{display:flex;align-items:center;gap:4px;}
+.h-nl{font-size:8px;color:#444;}
+.h-ni{width:30px;height:30px;object-fit:contain;}
+.h-saweria{background:rgba(255,200,0,.12);border:1px solid rgba(255,200,0,.3);color:#FFD700;font-size:10px;font-weight:bold;padding:3px 9px;border-radius:20px;letter-spacing:.5px;white-space:nowrap;animation:sawpulse 3s ease-in-out infinite;}
+@keyframes sawpulse{0%,100%{opacity:.8;}50%{opacity:1;background:rgba(255,200,0,.2);}}
+
+/* MAIN */
+#main{flex:1;display:flex;overflow:hidden;background:#040412;}
+
+/* LEFT */
+#lcol{width:230px;flex-shrink:0;display:flex;flex-direction:column;background:#07071E;border-right:1px solid rgba(255,255,255,.05);overflow:hidden;}
+.panel-hdr{padding:7px 10px;font-size:9px;letter-spacing:1.5px;color:#444;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:5px;flex-shrink:0;}
+.leaderboard-wrap{flex:1;overflow:hidden;}
+#lb-frame{width:100%;height:100%;border:none;display:block;background:transparent;}
+.mini-stats{flex-shrink:0;padding:8px 10px;display:flex;flex-direction:column;gap:5px;border-top:1px solid rgba(255,255,255,.05);}
+.ms{display:flex;justify-content:space-between;align-items:center;}
+.msl{font-size:9px;color:#444;letter-spacing:1px;}
+.msv{font-size:12px;font-weight:bold;color:#FFD700;}
+
+/* QR PANEL */
+.qr-panel{flex-shrink:0;padding:10px 12px;border-top:1px solid rgba(255,215,0,.15);display:flex;flex-direction:column;align-items:center;gap:5px;background:rgba(255,215,0,.03);}
+.qr-wrap{width:108px;height:108px;background:#fff;border-radius:8px;padding:4px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 18px rgba(255,215,0,.18);position:relative;overflow:hidden;}
+.qr-wrap::after{content:'';position:absolute;inset:0;border-radius:8px;box-shadow:inset 0 0 0 2px #FFD700;}
+.qr-wrap img{width:100%;height:100%;display:block;border-radius:4px;}
+.qr-url{font-size:9px;color:#FFD700;letter-spacing:.5px;font-weight:bold;text-align:center;}
+.qr-hint{font-size:8px;color:#444;letter-spacing:.5px;text-align:center;}
+.qr-ping{width:7px;height:7px;background:#FFD700;border-radius:50%;animation:qrping 1.8s ease-in-out infinite;}
+@keyframes qrping{0%,100%{box-shadow:0 0 0 0 rgba(255,215,0,.7);}70%{box-shadow:0 0 0 7px rgba(255,215,0,0);}}
+
+
+/* CENTER */
+#gcenter{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;overflow:hidden;position:relative;}
+#gcol{position:relative;flex-shrink:0;}
+#gc{display:block;}
+
+/* GO warn bar */
+#gobar{position:absolute;top:0;left:0;right:0;height:3px;background:transparent;z-index:30;transition:background .1s;}
+#gobar.warn{background:rgba(255,50,50,.7);animation:goblink .3s linear infinite;}
+@keyframes goblink{0%,100%{opacity:1;}50%{opacity:.4;}}
+
+/* Mediashare overlay */
+#ms-wrap{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:50;display:flex;align-items:flex-start;justify-content:center;}
+#ms-frame{width:320px;height:180px;border:none;background:transparent;pointer-events:none;}
+
+/* RIGHT */
+#rcol{width:260px;flex-shrink:0;display:flex;flex-direction:column;background:#07071E;border-left:1px solid rgba(255,255,255,.05);overflow:hidden;}
+.recent-wrap{flex:0 0 210px;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.05);}
+#rec-frame{width:100%;height:210px;border:none;display:block;background:transparent;}
+.nxt-panel{flex-shrink:0;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.05);}
+.nxt-row{display:flex;gap:6px;}
+.nb{display:flex;flex-direction:column;align-items:center;gap:2px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:5px;flex:1;}
+.ni{width:48px;height:48px;object-fit:contain;}
+.nn{font-size:8px;color:#555;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:64px;text-align:center;}
+.nl{font-size:7px;color:#2A2A5A;}
+.chat-hdr{padding:6px 10px;border-bottom:1px solid rgba(255,255,255,.05);font-size:9px;color:#444;letter-spacing:1.5px;display:flex;justify-content:space-between;flex-shrink:0;}
+#chat-box{flex:1;overflow:hidden;padding:6px 8px;display:flex;flex-direction:column;gap:2px;justify-content:flex-end;min-height:0;}
+.cm{font-size:10.5px;line-height:1.4;animation:mi .2s ease;}
+@keyframes mi{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+.cu{font-weight:bold;margin-right:2px;}
+.ct{color:#999;}
+
+/* FOOTER */
+#ftr{flex-shrink:0;display:flex;flex-direction:column;}
+
+/* Donation ticker — custom animated text, not iframe */
+.donation-ticker{height:30px;background:#09092A;border-top:1px solid rgba(255,200,0,.2);overflow:hidden;display:flex;align-items:center;padding:0 12px;gap:10px;}
+.dt-label{font-size:9px;color:#FFD700;letter-spacing:1px;flex-shrink:0;}
+.dt-msg{font-size:10px;color:#aaa;animation:dtfade 6s ease-in-out infinite;}
+@keyframes dtfade{0%,90%{opacity:1;}95%,100%{opacity:0;}}
+
+/* Tier ticker */
+.tier-ticker{height:38px;background:#070722;border-top:1px solid rgba(255,215,0,.1);display:flex;align-items:center;overflow:hidden;}
+.tt-label{padding:0 10px;font-size:9px;color:#222;flex-shrink:0;}
+.tt-wrap{overflow:hidden;flex:1;position:relative;mask-image:linear-gradient(90deg,transparent,black 30px,black calc(100% - 30px),transparent);-webkit-mask-image:linear-gradient(90deg,transparent,black 30px,black calc(100% - 30px),transparent);}
+.tt{display:flex;gap:5px;padding:0 5px;white-space:nowrap;animation:mq 80s linear infinite;}
+@keyframes mq{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.tp{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:9px;flex-shrink:0;border:1px solid;opacity:.8;}
+
+/* WHEEL OVERLAY */
+#wheel-wrap{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,20,.78);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+#wheel-wrap.show{display:flex;}
+#wheel-inner{background:#0A0A28;border:2px solid #FFD700;border-radius:16px;overflow:hidden;width:500px;height:520px;position:relative;box-shadow:0 0 60px rgba(255,215,0,.25);}
+#wheel-frame{width:100%;height:460px;border:none;display:block;}
+.wheel-close{position:absolute;top:8px;right:10px;background:none;border:none;color:#FFD700;font-size:18px;cursor:pointer;z-index:10;opacity:.7;}
+.wheel-close:hover{opacity:1;}
+.wheel-lbl{font-size:10px;color:#444;text-align:center;padding:4px;letter-spacing:1px;}
+
+/* SOUNDBOARD hidden */
+#sb-frame{display:none;width:0;height:0;border:none;}
+
+/* QR CORNER BADGE */
+#qr-corner{position:fixed;bottom:54px;right:14px;z-index:90;display:flex;flex-direction:column;align-items:center;background:rgba(7,7,30,.92);border:1px solid rgba(255,215,0,.35);border-radius:10px;padding:6px 7px;box-shadow:0 0 20px rgba(255,215,0,.15);}
+/* AUDIO + SAWERIA BUTTONS */
+#abtn{position:fixed;bottom:12px;right:12px;background:rgba(0,0,0,.85);border:1px solid rgba(255,255,255,.12);color:#555;font-size:10px;padding:5px 11px;border-radius:20px;cursor:pointer;z-index:999;transition:color .2s,border-color .2s,opacity .4s;}
+#abtn:hover{color:#FFD700;border-color:#FFD700;}
+#saw-btn{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(255,200,0,.12);border:1px solid rgba(255,200,0,.35);color:#FFD700;font-size:10px;padding:5px 14px;border-radius:20px;cursor:pointer;z-index:999;letter-spacing:.5px;}
+#saw-btn:hover{background:rgba(255,200,0,.25);}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- HEADER -->
+<div id="hdr">
+  <span class="live-dot">● LIVE</span>
+  <span class="h-title">⚡ ONE WEEK NON STOP STREAM BRAINROOT ⚡</span>
+  <div class="h-stats">
+    <div class="hst"><span class="hsl">SCORE</span><span class="hsv" id="h-sc">0</span></div>
+    <div class="hst"><span class="hsl">BEST</span><span class="hsv" id="h-bt">—</span></div>
+    <div class="hst"><span class="hsl">MERGE</span><span class="hsv" id="h-mg">0</span></div>
+    <div class="hst"><span class="hsl">TIER MAX</span><span class="hsv" id="h-mt">—</span></div>
+  </div>
+  <div class="h-right">
+    <span id="vct">1,247 👁</span>
+    <div class="h-nxt">
+      <span class="h-nl">NEXT</span>
+      <img id="h-ni" class="h-ni" src="" alt="">
+      <span class="h-nl">→</span>
+      <img id="h-ai" class="h-ni" src="" alt="">
+    </div>
+    <div class="h-saweria">🌸 SAWERIA AKTIF</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+  <!-- LEFT: Leaderboard + Stats -->
+  <div id="lcol">
+    <div class="panel-hdr"><span>🏆</span><span>LEADERBOARD DONASI</span></div>
+    <div class="leaderboard-wrap">
+      <iframe id="lb-frame" src="https://saweria.co/widgets/leaderboard?streamKey=6d063565f9f30af0c7fbc25606599d3d" scrolling="no" allowtransparency="true"></iframe>
+    </div>
+    <div class="mini-stats">
+      <div class="ms"><span class="msl">ITEMS</span><span class="msv" id="d-it">0</span></div>
+      <div class="ms"><span class="msl">COMBO MAX</span><span class="msv" id="d-cb">0</span></div>
+      <div class="ms"><span class="msl">SESSION</span><span class="msv" id="d-ss">00:00</span></div>
+      <div class="ms"><span class="msl">GAMES</span><span class="msv" id="d-gp">0</span></div>
+      <div class="ms"><span class="msl">TOP TIER</span><span class="msv" id="d-th" style="font-size:9px;word-break:break-all;">—</span></div>
+    </div>
+
+    <!-- QR CODE SAWERIA — ganti URL di src img jika username berbeda -->
+    <div class="qr-panel">
+      <div style="font-size:8px;color:#444;letter-spacing:1.5px;margin-bottom:2px;display:flex;align-items:center;gap:5px;"><div class="qr-ping"></div>SCAN TO DONATE</div>
+      <div class="qr-wrap">
+        <img id="qr-img" src="https://saweria.co/widgets/qr?streamKey=6d063565f9f30af0c7fbc25606599d3d" alt="QR Saweria" loading="lazy">
+      </div>
+      <div class="qr-url">saweria.co/oktetod</div>
+      <div class="qr-hint">Donasi via Saweria 🌸</div>
+    </div>
+  </div>
+
+  <!-- CENTER: Game -->
+  <div id="gcenter">
+    <div id="gcol">
+      <canvas id="gc"></canvas>
+      <!-- FIX 3: GO warning bar — shows red pulse before game over -->
+      <div id="gobar"></div>
+      <!-- Mediashare overlay -->
+      <div id="ms-wrap">
+        <iframe id="ms-frame" src="https://saweria.co/widgets/mediashare?streamKey=6d063565f9f30af0c7fbc25606599d3d" scrolling="no" allowtransparency="true"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Recent + Next + Chat -->
+  <div id="rcol">
+    <div class="panel-hdr" style="flex-shrink:0;"><span>🌸</span><span>DONASI TERBARU</span></div>
+    <div class="recent-wrap">
+      <iframe id="rec-frame" src="https://saweria.co/widgets/recent?streamKey=6d063565f9f30af0c7fbc25606599d3d" scrolling="no" allowtransparency="true"></iframe>
+    </div>
+    <div class="nxt-panel">
+      <div style="font-size:8px;color:#444;letter-spacing:1.5px;margin-bottom:6px;">NEXT ITEMS</div>
+      <div class="nxt-row">
+        <div class="nb"><img id="s-ni" class="ni" src="" alt=""><div class="nn" id="s-nn">—</div><div class="nl">NEXT</div></div>
+        <div class="nb"><img id="s-ai" class="ni" src="" alt=""><div class="nn" id="s-an">—</div><div class="nl">AFTER</div></div>
+      </div>
+    </div>
+    <div class="chat-hdr"><span>💬 LIVE CHAT</span><span id="c-cnt" style="color:#2A2A5A;">0 msgs</span></div>
+    <div id="chat-box"></div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div id="ftr">
+  <!-- FIX 11: Custom ticker instead of duplicate iframe -->
+  <div class="donation-ticker">
+    <span class="dt-label">🌸 SAWERIA</span>
+    <span class="dt-msg" id="dt-msg">Dukung stream ini! Donasi via Saweria ⬆</span>
+  </div>
+  <div class="tier-ticker">
+    <span class="tt-label">TIER →</span>
+    <div class="tt-wrap"><div class="tt" id="tt"></div></div>
+  </div>
+</div>
+
+<!-- WHEEL OVERLAY -->
+<div id="wheel-wrap" onclick="closeWheel(event)">
+  <div id="wheel-inner">
+    <button class="wheel-close" onclick="document.getElementById('wheel-wrap').classList.remove('show')">✕</button>
+    <iframe id="wheel-frame" src="https://saweria.co/widgets/wheel?streamKey=6d063565f9f30af0c7fbc25606599d3d" scrolling="no" allowtransparency="true"></iframe>
+    <div class="wheel-lbl">KLIK DI LUAR UNTUK TUTUP</div>
+  </div>
+</div>
+
+<div id="qr-corner">
+  <div style="font-size:7px;color:#FFD700;letter-spacing:.5px;margin-bottom:3px;text-align:center;">🌸 DONASI</div>
+  <div style="background:#fff;border-radius:5px;padding:3px;width:64px;height:64px;box-shadow:0 0 12px rgba(255,215,0,.35);">
+    <img src="https://saweria.co/widgets/qr?streamKey=6d063565f9f30af0c7fbc25606599d3d" alt="QR" style="width:58px;height:58px;display:block;border-radius:3px;">
+  </div>
+  <div style="font-size:7px;color:#aaa;text-align:center;margin-top:3px;">saweria.co/oktetod</div>
+</div>
+
+<!-- Soundboard: hidden iframe for audio alerts only -->
+<iframe id="sb-frame" src="https://saweria.co/widgets/soundboard?streamKey=6d063565f9f30af0c7fbc25606599d3d" scrolling="no" allowtransparency="true"></iframe>
+
+<div id="abtn" onclick="unlockAudio()">🔇 AKTIFKAN SUARA</div>
+<div id="saw-btn" onclick="openWheel()">🎡 BUKA WHEEL</div>
+
+<script>
+'use strict';
+// ═══════════════════════════════════════════════════
+//  CANVAS SETUP
+// ═══════════════════════════════════════════════════
+const cv = document.getElementById('gc');
+const cx = cv.getContext('2d');
+let GW = 460, GH = 620; // FIX 2: safe defaults so TR() never gets NaN
+
+// FIX 1+2+5: resizeGame now updates item radii AND clamps AI position
+function resizeGame() {
+  const gcenter = document.getElementById('gcenter');
+  const gcol    = document.getElementById('gcol');
+  const avH = gcenter.clientHeight - 4;
+  const avW = gcenter.clientWidth  - 4;
+  if (!avH || !avW) return; // guard: layout not ready yet
+  const newGH = Math.min(avH, Math.floor(avW * 620 / 460));
+  const newGW = Math.floor(newGH * 460 / 620);
+  if (!newGW || !newGH) return;
+  GW = newGW; GH = newGH;
+  cv.width  = GW; cv.height = GH;
+  gcol.style.width  = GW + 'px';
+  gcol.style.height = GH + 'px';
+  // FIX 2: update ALL existing item radii after resize
+  items.forEach(it => { it.r = TR(it.tier); });
+  // FIX 5: clamp AI to new bounds
+  const aiR = TR(nextT || 1);
+  const {WALL} = getConst();
+  ai.x  = clamp(ai.x,  aiR + WALL + 2, GW - WALL - aiR - 2);
+  ai.tx = clamp(ai.tx, aiR + WALL + 2, GW - WALL - aiR - 2);
+}
+window.addEventListener('resize', () => { resizeGame(); });
+
+// ═══════════════════════════════════════════════════
+//  TIER DATA — 24 tiers
+// ═══════════════════════════════════════════════════
+const TD = [
+  {t:1,  n:"Lemonkucing",     img:"assets/1.png",        c:"#FFD700"},
+  {t:2,  n:"Mangosapi",       img:"assets/2.png",        c:"#FF7F00"},
+  {t:3,  n:"Pisangkuda",      img:"assets/3.png",        c:"#FFEE33"},
+  {t:4,  n:"Duriankodok",     img:"assets/4.png",        c:"#88CC44"},
+  {t:5,  n:"Rambutanjing",    img:"assets/5.png",        c:"#CC2244"},
+  {t:6,  n:"Nanasbebek",      img:"assets/6.png",        c:"#FF9900"},
+  {t:7,  n:"Semangkamonyet",  img:"assets/7.png",        c:"#FF3366"},
+  {t:8,  n:"Jerukbuaya",      img:"assets/8.png",        c:"#FF5500"},
+  {t:9,  n:"Alpukatgajah",    img:"assets/9.png",        c:"#44AA44"},
+  {t:10, n:"Salakharimau",    img:"assets/10.png",       c:"#8B6513"},
+  {t:11, n:"DukuPanda",       img:"assets/epic/1.png",   c:"#BBBBBB"},
+  {t:12, n:"MarkisaGorila",   img:"assets/epic/2.png",   c:"#9933CC"},
+  {t:13, n:"BlimbingBadak",   img:"assets/epic/3.png",   c:"#44AACC"},
+  {t:14, n:"JambuDino",       img:"assets/epic/4.png",   c:"#22BB55"},
+  {t:15, n:"KedondongNaga",   img:"assets/epic/5.png",   c:"#FF4400"},
+  {t:16, n:"SukunAlien",      img:"assets/epic/6.png",   c:"#00FFCC"},
+  {t:17, n:"CempedakRobot",   img:"assets/epic/7.png",   c:"#8888FF"},
+  {t:18, n:"LangsatRaksasa",  img:"assets/epic/8.png",   c:"#FFAA00"},
+  {t:19, n:"KepelDewa",       img:"assets/epic/9.png",   c:"#FFD700"},
+  {t:20, n:"WuniPhoenix",     img:"assets/epic/10.png",  c:"#FF6600"},
+  {t:21, n:"MunduTitan",      img:"assets/epic/11.png",  c:"#EE88FF"},
+  {t:22, n:"GandariaCosmos",  img:"assets/epic/12.png",  c:"#4488FF"},
+  {t:23, n:"IBLIS BUAH",      img:"assets/epic/13.png",  c:"#FF2222"},
+  {t:24, n:"GLORBO SUPREME",  img:"assets/epic/14.png",  c:"#FFFFFF"},
+];
+const PTS = [10,30,60,100,160,250,400,600,900,1300,1800,2400,3200,4200,5500,7000,9000,11500,14500,18000,22000,27000,33000,50000];
+const MAXT = 24, SPAWNT = 4, MAXITM = 58;
+
+// FIX 2: TR always uses current GW — safe because GW initialized to 460
+function TR(t) { return Math.max(10, Math.round((14 + (t - 1) * 8) * GW / 460)); }
+TD.forEach((d, i) => { d.pts = PTS[i]; });
+
+// Preload images
+const IMGS = {};
+TD.forEach(d => { const img = new Image(); img.src = d.img; IMGS[d.t] = img; });
+
+// ═══════════════════════════════════════════════════
+//  PHYSICS CONSTANTS
+// ═══════════════════════════════════════════════════
+const GRAV = 0.52, SUB = 8, BNCE = 0.045, FRIC = 0.74;
+
+// FIX 15: cache getConst() result, called once per frame not 48x
+let _C = null;
+function getConst() {
+  if (_C) return _C;
+  _C = {
+    WALL  : Math.max(4, Math.round(GW * 0.011)),
+    FLOOR : GH - Math.max(4, Math.round(GW * 0.011)),
+    DANGER: Math.round(GH * 0.17),
+    DROPY : Math.round(GH * 0.10),
+  };
+  return _C;
+}
+// Invalidate cache on resize
+function invalidateConst() { _C = null; }
+const _origResize = resizeGame;
+// Patch resizeGame to also invalidate cache
+window.addEventListener('resize', invalidateConst);
+
+// ═══════════════════════════════════════════════════
+//  AUDIO — BGM
+// ═══════════════════════════════════════════════════
+let audioOn = false;
+const bgm = new Audio();
+let bgmIdx = 0;
+bgm.volume = 0.45;
+bgm.addEventListener('ended', () => {
+  bgmIdx = (bgmIdx + 1) % 5;
+  bgm.src = `bgm/${bgmIdx + 1}.mp3`;
+  bgm.play().catch(() => {});
+});
+let sfxCtx = null;
+
+function unlockAudio() {
+  if (audioOn) return;
+  audioOn = true;
+  try { sfxCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
+  bgm.src = 'bgm/1.mp3';
+  bgm.play().catch(() => {});
+  const b = document.getElementById('abtn');
+  if (b) {
+    b.textContent = '🔊 ON';
+    setTimeout(() => { b.style.opacity = '0'; }, 1800);
+    setTimeout(() => { b.style.display = 'none'; }, 2300);
+  }
+}
+document.addEventListener('click', unlockAudio, {once: true});
+
+function tone(f, dur, type, vol, dl) {
+  if (!sfxCtx) return;
+  try {
+    if (sfxCtx.state === 'suspended') sfxCtx.resume();
+    const o = sfxCtx.createOscillator(), g = sfxCtx.createGain();
+    o.connect(g); g.connect(sfxCtx.destination);
+    o.type = type || 'sine'; o.frequency.value = f;
+    const t = sfxCtx.currentTime + (dl || 0);
+    g.gain.setValueAtTime(vol || .3, t);
+    g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    o.start(t); o.stop(t + dur + .01);
+  } catch(e) {}
+}
+const NOTES = [262,294,330,349,392,440,494,523,587,659,698,784,880,988,1047,1175,1319,1397,1568,1760,1976,2093,2349,2637];
+function sndMerge(t) {
+  const f = NOTES[Math.min(t - 1, NOTES.length - 1)];
+  tone(f, .22, 'sine', .36);
+  if (t >= 3)  tone(f * 1.5, .18, 'triangle', .14, .02);
+  if (t >= 6)  tone(f * 2,   .25, 'sine',     .10, .04);
+  if (t >= 9)  tone(f * 2.5, .30, 'sawtooth', .08, .06);
+  if (t >= 12) for (let i = 0; i < 3; i++) tone(f * (1.5 + i * .5), .4, 'sawtooth', .06, i * .055);
+  if (t >= 17) for (let i = 0; i < 5; i++) tone(f * (1 + i * .22),  .55,'sine',     .10, i * .045);
+  if (t >= 22) for (let i = 0; i < 7; i++) tone(f * (1 + i * .18),  .80,'sawtooth', .12, i * .040);
+}
+function sndDrop() { tone(190, .07, 'sine', .13); tone(120, .11, 'sine', .09, .04); }
+function sndGameOver() { [523,415,349,262,196,131].forEach((f,i) => tone(f,.45,'sawtooth',.32,i*.22)); }
+
+// ═══════════════════════════════════════════════════
+//  GAME STATE
+// ═══════════════════════════════════════════════════
+let items = [], mergeQ = [], parts = [], floats = [];
+let nextT = rndT(), afterT = rndT(), eid = 0;
+let score = 0, best = 0, merges = 0, maxTier = 1, totalGames = 0;
+let gameOver = false, goTime = 0;
+let mFlash = {txt: '', col: '#fff', tmr: 0};
+let combo = 0, maxCombo = 0;
+const sessStart = Date.now();
+
+// FIX 6+7+8: all timers are now ms-based, not frame-based
+let dropReadyAt = 0;   // timestamp when next drop is allowed
+let comboEndAt  = 0;   // timestamp when combo expires
+let chatNextAt  = Date.now() + 4000; // timestamp for next random chat
+
+function rndT() { return 1 + Math.floor(Math.random() * SPAWNT); }
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+function ri(n) { return Math.floor(Math.random() * n); }
+
+function mkItem(tier, x, y) {
+  return { id: eid++, tier, x, y, vx: 0, vy: 0, r: TR(tier), flash: 0, merging: false, sched: false, cool: true };
+}
+function setCool(it, ms) { it.cool = true; setTimeout(() => { it.cool = false; }, ms || 400); }
+
+// ═══════════════════════════════════════════════════
+//  AI PLAYER — organic human simulation
+// ═══════════════════════════════════════════════════
+const ai = { x: 230, tx: 230, state: 'wait', tmr: 90, ph: 0 };
+
+function aiTick() {
+  const {WALL, DANGER} = getConst();
+  const r = TR(nextT);
+
+  // Smooth organic cursor movement with micro-jitter
+  ai.ph += 0.033;
+  const wobble = Math.sin(ai.ph * 1.3) * 0.85 + Math.sin(ai.ph * 0.7) * 0.45;
+  ai.x += (ai.tx - ai.x) * 0.09 + wobble * 0.5 + (Math.random() - .5) * 0.3;
+  ai.x = clamp(ai.x, r + WALL + 2, GW - WALL - r - 2);
+
+  ai.tmr--;
+  switch (ai.state) {
+    case 'wait':
+      if (ai.tmr <= 0) { ai.state = 'think'; ai.tmr = 20 + ri(60); }
+      break;
+    case 'think': {
+      // Occasionally glance around the board
+      if (ri(55) === 0) ai.tx = clamp(GW * (.15 + Math.random() * .7), r + WALL + 4, GW - WALL - r - 4);
+      if (ai.tmr <= 0) {
+        // Smart targeting: look for same tier to merge, prefer items deeper in board
+        const targets = items.filter(i => !i.merging && !i.cool && i.tier === nextT && i.y > DANGER + r * 2.5);
+        if (targets.length > 0 && Math.random() < 0.65) {
+          const pick = targets[ri(targets.length)];
+          ai.tx = clamp(pick.x + (Math.random() - .5) * 20, r + WALL + 4, GW - WALL - r - 4);
+        } else {
+          ai.tx = clamp(GW * (.12 + Math.random() * .76), r + WALL + 4, GW - WALL - r - 4);
+        }
+        ai.state = 'aim'; ai.tmr = 14 + ri(40);
+      }
+      break;
+    }
+    case 'aim':
+      // Small hand wobble while aiming
+      ai.x += (Math.random() - .5) * 1.4;
+      if (ai.tmr <= 0) {
+        // Occasional miss (human error)
+        if (Math.random() < 0.08) ai.tx = clamp(ai.tx + (Math.random() - .5) * 90, r + WALL + 4, GW - WALL - r - 4);
+        ai.state = 'drop'; ai.tmr = 5 + ri(12);
+      }
+      break;
+    case 'drop':
+      if (ai.tmr <= 0) { doDrop(); ai.state = 'wait'; ai.tmr = 50 + ri(110); }
+      break;
+  }
+}
+
+function doDrop() {
+  const now = Date.now();
+  if (now < dropReadyAt || gameOver || items.length >= MAXITM) return;
+  const {WALL, DROPY} = getConst();
+  const r = TR(nextT);
+  const x = clamp(ai.x, r + WALL + 1, GW - WALL - r - 1);
+  // FIX 4: spawn center at DROPY + r so TOP of item = DROPY (no teleport on first frame)
+  const it = mkItem(nextT, x, DROPY + r);
+  it.vy = 1.5;
+  setCool(it, 380);
+  items.push(it);
+  nextT = afterT; afterT = rndT();
+  // FIX 6: time-based cooldown (500ms)
+  dropReadyAt = now + 500;
+  sndDrop();
+  hud();
+}
+
+// ═══════════════════════════════════════════════════
+//  PHYSICS  — solid, no drift, no clipping
+// ═══════════════════════════════════════════════════
+function physics() {
+  const {WALL, FLOOR, DROPY} = getConst();
+  const now = performance.now();
+
+  // Process merge queue (100ms delay gives visual time to see collision)
+  const rdy = mergeQ.filter(m => now - m.t >= 100);
+  mergeQ    = mergeQ.filter(m => now - m.t  < 100);
+  rdy.forEach(m => doMerge(m.a, m.b));
+
+  const dt = 1 / SUB;
+
+  for (let s = 0; s < SUB; s++) {
+    // 1. Integrate velocity
+    for (const it of items) {
+      if (it.merging) continue;
+      it.vy += GRAV * dt;
+      it.x  += it.vx * dt;
+      it.y  += it.vy * dt;
+    }
+
+    // 2. Wall + floor + ceiling constraints
+    for (const it of items) {
+      if (it.merging) continue;
+      if (it.x - it.r < WALL)      { it.x = WALL + it.r;     it.vx =  Math.abs(it.vx) * BNCE; }
+      if (it.x + it.r > GW - WALL) { it.x = GW - WALL - it.r; it.vx = -Math.abs(it.vx) * BNCE; }
+      if (it.y + it.r > FLOOR)     { it.y = FLOOR - it.r;    it.vy = -Math.abs(it.vy) * BNCE; it.vx *= FRIC; }
+      // Ceiling: keep items below drop line
+      if (it.y - it.r < DROPY)     { it.y = DROPY + it.r;    if (it.vy < 0) it.vy = 0; }
+    }
+
+    // 3. Circle-circle collision (no bias — FIX 1)
+    const n = items.length;
+    for (let i = 0; i < n; i++) {
+      const a = items[i];
+      if (a.merging) continue;
+      for (let j = i + 1; j < n; j++) {
+        const b = items[j];
+        if (b.merging) continue;
+        const dx = b.x - a.x, dy = b.y - a.y;
+        const d2 = dx * dx + dy * dy;
+        const md = a.r + b.r;
+        if (d2 >= md * md || d2 < 0.0001) continue;
+        const d  = Math.sqrt(d2);
+        const nx = dx / d, ny = dy / d;
+
+        // Same tier → queue merge
+        if (a.tier === b.tier && a.tier < MAXT && !a.cool && !b.cool && !a.sched && !b.sched) {
+          a.sched = true; b.sched = true;
+          a.merging = true; b.merging = true;
+          mergeQ.push({a, b, t: performance.now()});
+          continue;
+        }
+
+        // FIX 1: position correction — NO +0.5 bias, only push by actual overlap
+        const ov = (md - d) * 0.5;
+        a.x -= nx * ov; a.y -= ny * ov;
+        b.x += nx * ov; b.y += ny * ov;
+
+        // Velocity impulse (elastic coefficient = BNCE)
+        const rv = (b.vx - a.vx) * nx + (b.vy - a.vy) * ny;
+        if (rv >= 0) continue; // already separating
+        const imp = -(1 + BNCE) * rv * 0.5;
+        a.vx -= imp * nx; a.vy -= imp * ny;
+        b.vx += imp * nx; b.vy += imp * ny;
+      }
+    }
+  }
+
+  // 4. Per-frame heavy damping — makes settled items STAY settled
+  for (const it of items) {
+    if (it.merging) continue;
+    const spd = Math.hypot(it.vx, it.vy);
+    if      (spd < 0.08) { it.vx = 0; it.vy = 0; }          // full stop
+    else if (spd < 2.0)  { it.vx *= 0.62; it.vy *= 0.62; }  // heavy damp near rest
+    else if (spd < 5.0)  { it.vx *= 0.97; it.vy *= 0.97; }  // moderate damp
+    else                 { it.vx *= 0.998; it.vy *= 0.998; } // light damp fast
+    it.flash = Math.max(0, it.flash - 1);
+  }
+}
+
+function doMerge(a, b) {
+  items = items.filter(i => i !== a && i !== b);
+  const nt = a.tier + 1;
+  const mx = (a.x + b.x) * 0.5;
+  const my = (a.y + b.y) * 0.5;
+  // Max tier reached: bonus points, no new item
+  if (nt > MAXT) { score += PTS[MAXT - 1]; hud(); return; }
+  const ni = mkItem(nt, mx, my);
+  ni.vx = (a.vx + b.vx) * 0.10;
+  ni.vy = (a.vy + b.vy) * 0.10 - 0.6; // small upward pop
+  ni.flash = 32;
+  setCool(ni, 540);
+  items.push(ni);
+  const pts = PTS[nt - 1];
+  score  += pts;
+  merges += 1;
+  if (nt > maxTier) { maxTier = nt; document.getElementById('d-th').textContent = TD[nt-1].n; }
+  // FIX 7: time-based combo
+  const now = Date.now();
+  if (now < comboEndAt) combo++; else combo = 1;
+  comboEndAt = now + 2800; // 2.8s combo window
+  if (combo > maxCombo) maxCombo = combo;
+  spawnParts(mx, my, TD[nt-1].c, 12 + nt);
+  sndMerge(nt);
+  // FIX 8: float font minimum 11px
+  const fsz = Math.max(11, Math.round((13 + Math.min(nt, 10)) * GW / 460));
+  addFloat(mx, my - ni.r - 8,  '+' + pts.toLocaleString(), TD[nt-1].c, fsz);
+  if (combo >= 2) addFloat(mx, my - ni.r - 28, '×' + combo + ' COMBO!', '#FFD700', Math.max(10, Math.round(11 * GW / 460)));
+  mFlash.txt = TD[nt-1].n + '!'; mFlash.col = TD[nt-1].c; mFlash.tmr = 78;
+  if (Math.random() < 0.6) addChat(mergeChat(TD[nt-1].n));
+  hud();
+}
+
+// ═══════════════════════════════════════════════════
+//  GAME OVER — FIX 3: sustained danger counter
+// ═══════════════════════════════════════════════════
+let goWarnFrames = 0;
+const GO_WARN_NEEDED = 55; // ~0.9s at 60fps before actual game over
+
+function checkGO() {
+  if (gameOver || items.length < 2) { goWarnFrames = 0; updateGoBar(0); return; }
+  const {DANGER} = getConst();
+  let inDanger = false;
+  for (const it of items) {
+    if (it.merging || it.cool) continue;
+    // Item must be: nearly stopped AND top above danger line
+    if (Math.hypot(it.vx, it.vy) < 0.5 && it.y - it.r < DANGER) {
+      inDanger = true; break;
+    }
+  }
+  if (inDanger) {
+    goWarnFrames++;
+    updateGoBar(goWarnFrames / GO_WARN_NEEDED);
+    if (goWarnFrames >= GO_WARN_NEEDED) triggerGO();
+  } else {
+    goWarnFrames = Math.max(0, goWarnFrames - 4); // decay 4x faster than accumulation
+    updateGoBar(goWarnFrames / GO_WARN_NEEDED);
+  }
+}
+
+function updateGoBar(ratio) {
+  const bar = document.getElementById('gobar');
+  if (!bar) return;
+  if (ratio > 0.1) { bar.classList.add('warn'); }
+  else             { bar.classList.remove('warn'); }
+}
+
+function triggerGO() {
+  gameOver = true; goTime = performance.now();
+  if (score > best) best = score;
+  goWarnFrames = 0;
+  updateGoBar(0);
+  sndGameOver();
+  addChat(['GAME OVER BROO 💀💀', '#FF3333']);
+  addChat(['SKOR: ' + score.toLocaleString() + ' 🏆', '#FFD700']);
+  hud();
+}
+
+function restart() {
+  items = []; mergeQ = []; parts = []; floats = [];
+  score = 0; merges = 0; maxTier = 1; combo = 0; maxCombo = 0;
+  comboEndAt = 0; dropReadyAt = 0; mFlash.tmr = 0;
+  nextT = rndT(); afterT = rndT();
+  gameOver = false; goTime = 0; goWarnFrames = 0;
+  updateGoBar(0);
+  totalGames++;
+  ai.state = 'wait'; ai.tmr = 80;
+  const {WALL} = getConst();
+  const r = TR(nextT);
+  ai.x  = GW / 2;
+  ai.tx = GW / 2;
+  // FIX 10: reset top tier display on restart
+  document.getElementById('d-th').textContent = '—';
+  hud();
+}
+
+// ═══════════════════════════════════════════════════
+//  PARTICLES + FLOAT TEXT
+// ═══════════════════════════════════════════════════
+function spawnParts(x, y, col, n) {
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * Math.PI * 2;
+    const spd = 1.5 + Math.random() * 6;
+    parts.push({ x, y, vx: Math.cos(a)*spd, vy: Math.sin(a)*spd - 1.2, r: 1.5 + Math.random()*4, life: 1, dec: 0.02 + Math.random()*0.015, col });
+  }
+}
+function tickParts() {
+  parts = parts.filter(p => {
+    p.x += p.vx; p.y += p.vy;
+    p.vx *= 0.93; p.vy = p.vy * 0.93 + 0.08;
+    p.life -= p.dec;
+    return p.life > 0 && p.y < GH + 30;
+  });
+}
+function addFloat(x, y, txt, col, sz) { floats.push({x, y, txt, col, sz: sz || 14, life: 1.3, vy: -0.88}); }
+function tickFloats() { floats = floats.filter(f => { f.y += f.vy; f.life -= 0.016; return f.life > 0; }); }
+
+// ═══════════════════════════════════════════════════
+//  CHAT SYSTEM  — FIX 7: time-based scheduling
+// ═══════════════════════════════════════════════════
+const UNAME = ['BrainrotGang','DurianKodok99','LemonKucingFan','GlorboHunter','SukunAlienID','PixelMonyet88','GajahGamerBro','HarimauKing','PhoenixGamer','TitanSlayer','CosmosPlayer','MangoSapiStan','JambuDinoFan','RambutanJingBro','NanasBebekReal','SemangkaMonyet','JerukBuayaPro','AlpukatGajah','SalakKingID','WuniPhoenixFan','BrainrotIndo','KacangKudaBro','DelimaCobra'];
+const BCHAT = [
+  ['MANTAP BGT 🔥🔥','#FFD700'],['WAH GILAAAAK','#FF6B00'],['YA AMPUNN BISA!!','#2ECC71'],
+  ['KEREN BGT PAK','#3498DB'],['GA NYANGKA BOK','#ddd'],['HAHAHA GOKIL 😭','#FFD700'],
+  ['NAIK TIER LAGI!!','#FF6B00'],['AUTO SUBSCRIBE','#FF4444'],['aduh udah deket danger nih','#FF4444'],
+  ['W moment bro','#FFD700'],['bismillah merge...','#ddd'],['bisa ga ya nih?','#888'],
+  ['HAJAR HAJAR HAJAR','#FF3366'],['GILA COMBONYAAA','#FFD700'],['GG WP BRO 🫡','#2ECC71'],
+  ['lemon + lemon = sapi?? wkwk','#FFD700'],['emang bisa nyampe tier 24?','#888'],
+  ['udah jam berapa ini masih nonton','#666'],['GLORBO SUPREME mana gan??','#FF9900'],
+  ['kalau GLORBO keluar gw donate 50rb','#888'],['fisikanya solid banget nggak tembus','#2ECC71'],
+  ['ini bot atau manusia yang main?','#888'],['stream 1 minggu non stop gila sih','#FF6B00'],
+  ['udah donate nih bang, mainkan!','#FFD700'],['saweria aktif gass donasi sekarang!','#FF9900'],
+  ['DANGER DANGER DANGER 😱','#FF4444'],['wkwkwk hampir game over','#888'],
+  ['langsung combo gila','#FFD700'],['nice placement bro','#2ECC71'],['close call banget!','#FF9900'],
+];
+function mergeChat(n) {
+  const r = Math.random();
+  if (r < .18) return ['OMG ' + n.toUpperCase() + ' 🔥🔥', '#FFD700'];
+  if (r < .35) return [n + ' GILA KOK BISA!!', '#FF6B00'];
+  if (r < .52) return ['TIER BARU!! ' + n, '#2ECC71'];
+  if (r < .66) return ['WOI ' + n + ' MUNCUL', '#3498DB'];
+  if (r < .80) return ['MANTAP ' + n + ' GASSS', '#ddd'];
+  return ['masuk! ' + n + '!', '#888'];
+}
+let chatMsgs = [], chatTotal = 0;
+
+function addChat([txt, col]) {
+  const name = UNAME[ri(UNAME.length)];
+  chatMsgs.push({name, txt, col});
+  chatTotal++;
+  if (chatMsgs.length > 11) chatMsgs.shift();
+  const el = document.getElementById('chat-box');
+  if (el) el.innerHTML = chatMsgs.map(m =>
+    `<div class="cm"><span class="cu" style="color:${m.col}">${m.name}:</span><span class="ct"> ${m.txt}</span></div>`
+  ).join('');
+  const cc = document.getElementById('c-cnt');
+  if (cc) cc.textContent = chatTotal + ' msgs';
+}
+
+// FIX 7: time-based chat ticking (called every frame, uses timestamp)
+function chatTick() {
+  const now = Date.now();
+  if (now >= chatNextAt) {
+    addChat(BCHAT[ri(BCHAT.length)]);
+    chatNextAt = now + 900 + ri(2800); // 0.9s–3.7s between messages
+  }
+}
+
+// Saweria donation simulation in chat
+let donSimNext = Date.now() + 10000;
+const DONORS  = ['Rizky123','BrainrotKing','AnomalyFan','Wahyudi99','GlorboStan','PuspaWati','FarhanGG','BambangGG','SitiPlays'];
+const AMOUNTS = [5000,10000,15000,20000,50000,100000];
+const DON_MSGS = [
+  'semangat stream 1 minggu!',
+  'jangan lupa makan bang 😂',
+  'GLORBO SUPREME pliss',
+  'GG bro terus semangat',
+  'kocak banget game ini wkwk',
+  'donasi buat beli cemilan 🍕',
+];
+const DT_MSGS = [
+  'Dukung stream ini! Donasi via Saweria ⬆',
+  'Saweria aktif! Donasi kamu tampil di sini 🌸',
+  '1 Minggu Non Stop! Support streamer! 💪',
+  'Donasi = nama kamu di leaderboard 🏆',
+  'GLORBO SUPREME belum muncul... atau udah? 👀',
+];
+let dtIdx = 0, dtNext = Date.now();
+function donSimTick() {
+  const now = Date.now();
+  // Rotate footer donation message
+  if (now >= dtNext) {
+    const el = document.getElementById('dt-msg');
+    if (el) { el.textContent = DT_MSGS[dtIdx % DT_MSGS.length]; dtIdx++; }
+    dtNext = now + 7000;
+  }
+  // Random donation simulation
+  if (now >= donSimNext) {
+    const donor = DONORS[ri(DONORS.length)];
+    const amt   = AMOUNTS[ri(AMOUNTS.length)];
+    const msg   = DON_MSGS[ri(DON_MSGS.length)];
+    addChat([donor + ' donasi Rp' + amt.toLocaleString() + '! "' + msg + '" 🌸', '#FFD700']);
+    mFlash.txt = '🌸 SAWERIA! Rp' + amt.toLocaleString();
+    mFlash.col = '#FFD700'; mFlash.tmr = 100;
+    donSimNext = now + 12000 + ri(20000); // 12–32s between simulated donations
+  }
+}
+
+// ═══════════════════════════════════════════════════
+//  HUD
+// ═══════════════════════════════════════════════════
+function hud() {
+  document.getElementById('h-sc').textContent = score.toLocaleString();
+  document.getElementById('h-bt').textContent = best > 0 ? best.toLocaleString() : '—';
+  document.getElementById('h-mg').textContent = merges;
+  document.getElementById('h-mt').textContent = maxTier > 1 ? ('T' + maxTier) : '—';
+  document.getElementById('d-cb').textContent = maxCombo;
+  document.getElementById('d-gp').textContent = totalGames;
+  document.getElementById('h-ni').src = TD[nextT - 1].img;
+  document.getElementById('h-ai').src = TD[afterT - 1].img;
+  document.getElementById('s-ni').src = TD[nextT - 1].img;
+  document.getElementById('s-ai').src = TD[afterT - 1].img;
+  document.getElementById('s-nn').textContent = TD[nextT - 1].n;
+  document.getElementById('s-an').textContent = TD[afterT - 1].n;
+}
+// FIX 12: items count and session timer updated every second (not only on events)
+setInterval(() => {
+  document.getElementById('d-it').textContent = items.length;
+  const s = Math.floor((Date.now() - sessStart) / 1e3);
+  document.getElementById('d-ss').textContent =
+    String(Math.floor(s / 60)).padStart(2,'0') + ':' + String(s % 60).padStart(2,'0');
+}, 1000);
+let vws = 1247;
+setInterval(() => {
+  vws += Math.round((Math.random() - 0.43) * 11);
+  vws = Math.max(400, Math.min(9999, vws));
+  document.getElementById('vct').textContent = vws.toLocaleString() + ' 👁';
+}, 3200);
+
+// ═══════════════════════════════════════════════════
+//  TIER LEGEND FOOTER
+// ═══════════════════════════════════════════════════
+(function buildLeg() {
+  const el = document.getElementById('tt');
+  for (let rep = 0; rep < 2; rep++) {
+    TD.forEach(d => {
+      const s = document.createElement('span');
+      s.className = 'tp';
+      s.style.color = d.c; s.style.borderColor = d.c + '44'; s.style.background = d.c + '11';
+      s.textContent = d.t + '. ' + d.n;
+      el.appendChild(s);
+    });
+  }
+})();
+
+// ═══════════════════════════════════════════════════
+//  WHEEL
+// ═══════════════════════════════════════════════════
+function openWheel()  { document.getElementById('wheel-wrap').classList.add('show'); }
+function closeWheel(e){ if (e.target === document.getElementById('wheel-wrap')) document.getElementById('wheel-wrap').classList.remove('show'); }
+
+// ═══════════════════════════════════════════════════
+//  RENDER
+// ═══════════════════════════════════════════════════
+function render() {
+  if (!GW || !GH) return;
+  const {WALL, FLOOR, DANGER, DROPY} = getConst();
+  const now = Date.now();
+
+  // Background
+  cx.fillStyle = '#06061C'; cx.fillRect(0, 0, GW, GH);
+  // Subtle dot grid
+  cx.fillStyle = 'rgba(255,255,255,.018)';
+  for (let x = 28; x < GW; x += 28) for (let y = 28; y < GH; y += 28) cx.fillRect(x, y, 1, 1);
+  // Scanlines
+  cx.fillStyle = 'rgba(0,0,20,.03)';
+  for (let y = 0; y < GH; y += 3) cx.fillRect(0, y, GW, 1);
+
+  // Walls
+  cx.fillStyle = '#10103A';
+  cx.fillRect(0, 0, WALL, GH);
+  cx.fillRect(GW - WALL, 0, WALL, GH);
+  cx.fillRect(0, GH - WALL, GW, WALL);
+  cx.strokeStyle = '#22226A'; cx.lineWidth = 1;
+  cx.strokeRect(0.5, 0.5, GW - 1, GH - 1);
+
+  // Danger zone
+  if (!gameOver) {
+    const pulse = 0.22 + Math.sin(now * 0.0048) * 0.09;
+    const warnRatio = goWarnFrames / GO_WARN_NEEDED;
+    // Intensity grows as warn counter increases
+    const baseAlpha = 0.05 + warnRatio * 0.12;
+    cx.fillStyle = `rgba(255,30,30,${baseAlpha})`;
+    cx.fillRect(WALL, 0, GW - WALL * 2, DANGER);
+    cx.strokeStyle = `rgba(255,${Math.round(55 - warnRatio*30)},${Math.round(55 - warnRatio*50)},${pulse + warnRatio * 0.4})`;
+    cx.setLineDash([8, 6]); cx.lineWidth = 1.5 + warnRatio * 1.5;
+    cx.beginPath(); cx.moveTo(WALL, DANGER); cx.lineTo(GW - WALL, DANGER); cx.stroke();
+    cx.setLineDash([]);
+    cx.font = 'bold 9px monospace'; cx.textAlign = 'right'; cx.textBaseline = 'alphabetic';
+    cx.fillStyle = `rgba(255,80,80,${pulse + warnRatio * 0.3 + 0.1})`;
+    cx.fillText('☠ DANGER', GW - WALL - 4, DANGER - 4);
+  }
+
+  // Items
+  for (const it of items) {
+    // FIX 9: explicit alpha, no ambiguous ternary
+    drawItem(it, it.merging ? 0.3 : 1.0);
+  }
+
+  // Particles
+  cx.save();
+  for (const p of parts) {
+    cx.globalAlpha = p.life;
+    cx.beginPath(); cx.arc(p.x, p.y, Math.max(0.5, p.r * p.life), 0, Math.PI * 2);
+    cx.fillStyle = p.col; cx.fill();
+  }
+  cx.restore();
+
+  // Float texts
+  cx.save(); cx.textAlign = 'center';
+  for (const f of floats) {
+    const a = Math.min(1, f.life);
+    if (a <= 0) continue;
+    cx.globalAlpha = a;
+    cx.font = 'bold ' + f.sz + 'px monospace'; cx.textBaseline = 'middle';
+    cx.lineWidth = 3; cx.strokeStyle = 'rgba(0,0,0,.92)';
+    cx.strokeText(f.txt, f.x, f.y);
+    cx.fillStyle = f.col; cx.fillText(f.txt, f.x, f.y);
+  }
+  cx.restore();
+
+  // FIX 14: Merge flash only when NOT game over
+  if (mFlash.tmr > 0 && !gameOver) {
+    mFlash.tmr--;
+    const fr = 78 - mFlash.tmr;
+    let a = fr < 10 ? fr / 10 : fr < 55 ? 1 : 1 - (fr - 55) / 23;
+    a = Math.max(0, a) * 0.86;
+    cx.save(); cx.globalAlpha = a;
+    cx.font = 'bold ' + Math.round(17 * GW / 460) + 'px monospace';
+    cx.textAlign = 'center'; cx.textBaseline = 'middle';
+    cx.lineWidth = 5; cx.strokeStyle = 'rgba(0,0,0,.96)';
+    cx.strokeText(mFlash.txt, GW / 2, GH / 2);
+    cx.fillStyle = mFlash.col; cx.fillText(mFlash.txt, GW / 2, GH / 2);
+    cx.restore();
+  }
+
+  // AI guide line + drop preview
+  if (!gameOver) {
+    const ax = clamp(ai.x, WALL + 4, GW - WALL - 4);
+    const nr = TR(nextT);
+    cx.strokeStyle = 'rgba(255,255,255,.055)'; cx.setLineDash([4, 7]); cx.lineWidth = 1;
+    cx.beginPath(); cx.moveTo(ax, WALL + 1); cx.lineTo(ax, DROPY - 4); cx.stroke();
+    cx.setLineDash([]);
+    cx.fillStyle = 'rgba(255,255,255,.38)'; cx.beginPath();
+    cx.moveTo(ax, DROPY); cx.lineTo(ax - 5, DROPY - 12); cx.lineTo(ax + 5, DROPY - 12); cx.fill();
+    drawAt(nextT, ax, DROPY + nr, 0.65);
+  }
+
+  // Game over overlay
+  if (gameOver) {
+    const elapsed = (performance.now() - goTime) / 1000;
+    const secs = Math.max(0, Math.ceil(5 - elapsed));
+    cx.fillStyle = 'rgba(4,4,18,.86)'; cx.fillRect(0, 0, GW, GH);
+    cx.textAlign = 'center'; cx.textBaseline = 'middle';
+    const fs1 = Math.round(34 * GW / 460);
+    const fs2 = Math.round(17 * GW / 460);
+    const fs3 = Math.round(12 * GW / 460);
+    cx.font = 'bold ' + fs1 + 'px monospace';
+    cx.fillStyle = '#FF3366'; cx.fillText('💀 GAME OVER', GW / 2, GH * 0.35);
+    cx.font = 'bold ' + fs2 + 'px monospace';
+    cx.fillStyle = '#FFD700'; cx.fillText('SCORE: ' + score.toLocaleString(), GW / 2, GH * 0.35 + fs1 * 1.5);
+    // FIX 13: show NEW BEST even when best was 0
+    if (score > 0 && score >= best) {
+      cx.font = 'bold ' + fs3 + 'px monospace'; cx.fillStyle = '#FFD700';
+      cx.fillText('🏆 NEW BEST SCORE!', GW / 2, GH * 0.35 + fs1 * 1.5 + fs2 * 1.6);
+    }
+    cx.font = fs3 + 'px monospace'; cx.fillStyle = '#444';
+    cx.fillText('Restart dalam ' + secs + '...', GW / 2, GH * 0.35 + fs1 * 1.5 + fs2 * 3.4);
+  }
+}
+
+function drawItem(it, alpha) {
+  const img = IMGS[it.tier];
+  const r = it.r;
+  const sz = r * 2.22;
+  cx.save(); cx.globalAlpha = (alpha == null) ? 1 : alpha;
+  if (img && img.complete && img.naturalWidth > 0) {
+    cx.drawImage(img, it.x - sz / 2, it.y - sz / 2, sz, sz);
+  } else {
+    // Fallback: colored circle with tier info
+    const d = TD[it.tier - 1];
+    const g = cx.createRadialGradient(it.x - r * 0.2, it.y - r * 0.2, r * 0.08, it.x, it.y, r);
+    g.addColorStop(0, d.c + '88'); g.addColorStop(1, d.c + '1A');
+    cx.beginPath(); cx.arc(it.x, it.y, r, 0, Math.PI * 2);
+    cx.fillStyle = g; cx.fill();
+    cx.strokeStyle = d.c; cx.lineWidth = 2; cx.stroke();
+    cx.font = 'bold ' + Math.max(8, Math.round(r * 0.22)) + 'px monospace';
+    cx.fillStyle = '#fff'; cx.textAlign = 'center'; cx.textBaseline = 'middle';
+    cx.fillText(d.n.slice(0, 8), it.x, it.y - r * 0.12);
+    cx.font = Math.max(7, Math.round(r * 0.16)) + 'px monospace';
+    cx.fillStyle = d.c; cx.fillText('T' + it.tier, it.x, it.y + r * 0.55);
+  }
+  // Merge flash ring
+  if (it.flash > 0) {
+    const f = it.flash / 32;
+    cx.beginPath(); cx.arc(it.x, it.y, r * (1 + f * 0.28), 0, Math.PI * 2);
+    cx.strokeStyle = `rgba(255,255,255,${f * 0.88})`; cx.lineWidth = r * 0.22; cx.stroke();
+  }
+  cx.restore();
+}
+
+function drawAt(tier, x, y, a) {
+  const r = TR(tier), img = IMGS[tier], sz = r * 2.22;
+  cx.save(); cx.globalAlpha = a || 1;
+  if (img && img.complete && img.naturalWidth > 0) {
+    cx.drawImage(img, x - sz / 2, y - sz / 2, sz, sz);
+  } else {
+    const d = TD[tier - 1];
+    cx.beginPath(); cx.arc(x, y, r, 0, Math.PI * 2);
+    cx.fillStyle = d.c + '40'; cx.fill();
+    cx.strokeStyle = d.c; cx.lineWidth = 2; cx.stroke();
+  }
+  cx.restore();
+}
+
+// ═══════════════════════════════════════════════════
+//  INIT + MAIN LOOP
+// ═══════════════════════════════════════════════════
+// Wait for layout to be ready before first resize
+requestAnimationFrame(() => {
+  resizeGame();
+  invalidateConst();
+  ai.x = GW / 2; ai.tx = GW / 2;
+  hud();
+});
+
+// Warm-up chat
+setTimeout(() => addChat(['woi stream udah mulai??', '#888']),               1200);
+setTimeout(() => addChat(['LETS GOOO!! BRAINROOT TIME 🔥', '#FFD700']),     2800);
+setTimeout(() => addChat(['pertama kali nonton, langsung gas!', '#2ECC71']), 4500);
+setTimeout(() => addChat(['saweria aktif dong!! siap donate', '#FF9900']),   7200);
+setTimeout(() => addChat(['GLORBO SUPREME kapan muncul???', '#888']),       11000);
+setTimeout(() => addChat(['fisikanya solid banget nih gamenya', '#2ECC71']),14000);
+
+function loop() {
+  if (!gameOver) {
+    invalidateConst(); // FIX 15: rebuild const cache once per frame
+    physics();
+    aiTick();
+    checkGO();
+    chatTick();
+    donSimTick();
+    tickParts();
+    tickFloats();
+  } else {
+    if (performance.now() - goTime > 5000) restart();
+  }
+  render();
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
