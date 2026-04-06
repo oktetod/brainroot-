@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "index.html",    "use": "@vercel/static" },
+    { "src": "char/**",       "use": "@vercel/static" },
+    { "src": "bgm/**",        "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/char/(.*)", "dest": "/char/$1" },
+    { "src": "/bgm/(.*)",  "dest": "/bgm/$1" },
+    { "src": "/(.*)",      "dest": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/bgm/(.*)",
+      "headers": [
+        { "key": "Cache-Control",  "value": "public, max-age=86400" },
+        { "key": "Accept-Ranges",  "value": "bytes" }
+      ]
+    },
+    {
+      "source": "/char/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }]
+    }
+  ]
+}
